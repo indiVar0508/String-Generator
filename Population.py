@@ -1,4 +1,6 @@
-from DNA import *
+import random
+from dna import DNA
+
 class Population:
 	def __init__(self, populationSize = 50, string = "this is default string", mutation = 0.01):
 		self.populationSize = populationSize 
@@ -41,7 +43,7 @@ class Population:
 		self.population = []
 		for _ in range(self.populationSize):
 			p1, p2 = self.matingPool[random.randint(0,len(self.matingPool)-1)], self.matingPool[random.randint(0,len(self.matingPool)-1)]
-			child = p1.crossOver(p2)
+			child = DNA.cross_over(p1, p2)
 			child.mutate()
 			self.population.append(child)
 		self.generation+=1
@@ -60,7 +62,7 @@ class Population:
 		while len(self.population) != len(self.matingPool): 
 			parentOne = self.pickSomeone()
 			parentTwo = self.pickSomeone()
-			child = parentOne.crossOver(parentTwo)
+			child = DNA.cross_over(parentOne, parentTwo)
 			child.mutate()
 			self.matingPool.append(child)
 
@@ -76,7 +78,7 @@ class Population:
 
 	def matched(self):
 		for _ in range(self.populationSize): 
-			if self.population[_].matched(): 
+			if self.population[_].evolved(): 
 				self.best = self.population[_].string
 				return True
 		return False
@@ -84,7 +86,7 @@ class Population:
 	def fitness(self):
 		maxfit = 0.4
 		for _ in range(self.populationSize): 
-			self.totalScore += self.population[_].setFitness()
+			self.totalScore += self.population[_].set_fitness()
 			if self.population[_].fitness > maxfit:
 				self.best = self.population[_].string
 				maxfit = self.population[_].fitness
