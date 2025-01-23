@@ -1,4 +1,4 @@
-from Population import *
+from population import Population
 import matplotlib.pyplot as plt
 
 class geneticAlgo:
@@ -10,9 +10,9 @@ class geneticAlgo:
 		while not self.p.matched():
 			self.p.evolve()
 			#self.p.optimized_evolve()
-			print('Generation : ',self.p.generation,' Best ->',self.p.getBest(),' target -> ',self.p.population[0].target,' best Score ->',self.p.bestScore)
-			self.scores.append(self.p.bestScore)
-		print('Generation taken : ',self.p.generation,' Target was  ->',self.p.getBest())
+			print('Generation : ',self.p.generation,' Best ->',self.p.get_best(),' target -> ',self.p.population[0].target,' best Score ->',self.p.best_score)
+			self.scores.append(self.p.best_score)
+		print('Generation taken : ',self.p.generation,' Target was  ->',self.p.get_best())
 		plt.plot(range(self.p.generation), self.scores)
 		plt.show()
 
