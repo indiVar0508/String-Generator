@@ -27,12 +27,17 @@ class DNA:
 			else: l[i] = parent_two.string[i]
 		child.string = ''.join(l)
 		return child
+	
+	@classmethod
+	def compute_fitness(cls, generated_string: str, target: str) -> float:
+		count = 0
+		for i in range(len(target)):
+			if generated_string[i] == target[i]: count += 1
+		return count / len(target)
+		
 
 	def set_fitness(self):
-		count = 0
-		for i in range(self.len):
-			if self.string[i] == self.target[i]: count += 1
-		self.fitness =  count / self.len
+		self.fitness = self.compute_fitness(self.string, self.target)
 		return self.fitness
 
 	def evolved(self):
