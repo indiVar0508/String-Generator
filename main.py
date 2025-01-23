@@ -25,7 +25,7 @@ class StringGenerator:
 		print('Generation taken : ',self.p.generation,' Target was  ->',self.p.get_best())
 
 	def randomise(self):
-		for _ in range(200):
+		for _ in range(350):
 			generated = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation + ' ', k=len(self.string_to_gen)))
 			self.random_scores.append(DNA.compute_fitness(generated, self.string_to_gen))
 		
@@ -37,6 +37,8 @@ if __name__ == '__main__':
 	if show_vis is True:
 		plt.plot(range(len(g.evolved_scores)), g.evolved_scores, label="evolved score")
 		plt.plot(range(len(g.random_scores)), g.random_scores, label="random score")
+		plt.xlabel("iterations")
+		plt.ylabel("fitness score(match b/w target and generated)")
 		plt.legend()
 		plt.show()
 
