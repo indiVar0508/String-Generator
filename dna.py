@@ -5,13 +5,10 @@ class DNA:
 	def __init__(self, target = "this is default string", mutation = 0.01):
 		self.target = target
 		self.len = len(self.target)
-		self.string = self.make_string()
+		self.string = ''.join(random.choices(string.ascii_letters + string.digits + string.punctuation + ' ', k=self.len))
 		self.mutation = mutation
 		self.fitness = 0.0
 		self.probability = 0.0
-
-	def make_string(self) -> str:
-		return ''.join(random.choices(string.ascii_letters+ string.punctuation + ' ', k=self.len))
 
 	def mutate(self) -> None:
 		temp = list(self.string)
